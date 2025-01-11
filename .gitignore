@@ -1,0 +1,6 @@
+node_modules
+config.env
+.cache/ 
+.parcel-cache/
+public/dist
+.git

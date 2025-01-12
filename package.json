@@ -4,7 +4,8 @@
   "description": "Learning node, express and mongoDB",
   "main": "app.js",
   "scripts": {
-    "start": "npx nodemon server.js",
+    "start": "node server.js",
+    "dev": "npx nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
     "watch": "parcel watch ./public/js/index.js --dist-dir ./public/dist --target app",

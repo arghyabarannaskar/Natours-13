@@ -8,10 +8,10 @@ const reviewModel = require('./../../models/reviewModel');
 dotenv.config({ path: './config.env' });
 
 // Connect to local MongoDB
-const DB = 'mongodb://127.0.0.1:27017/natours'; // Replace `natours` with your database name
+// const DB = 'mongodb://127.0.0.1:27017/natours'; // Replace `natours` with your database name
 
 mongoose
-  .connect(DB)
+  .connect(process.env.DATABASE)
   .then(() => console.log('DB connection successful!'))
   .catch(err => {
     console.error('DB connection failed:', err.message);

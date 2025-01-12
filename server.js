@@ -15,7 +15,7 @@ mongoose.set('strictQuery', true);
 mongoose.set('autoIndex', true);
 
 mongoose
-  .connect(`${process.env.MONGODB_URI}/natours`)
+  .connect(`${process.env.DATABASE}/natours`)
   .then(() => {
     console.log('Connected to database');
   })

@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -27,26 +28,6 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 // 1) GLOBAL MIDDLEWARES
-// Set security HTTP headers
-
-// app.use(
-//   helmet({
-//     contentSecurityPolicy: {
-//       directives: {
-//         defaultSrc: ["'self'"],
-//         scriptSrc: ["'self'", 'https://unpkg.com', 'https://js.stripe.com'],
-//         styleSrc: ["'self'", 'https://fonts.googleapis.com'],
-//         fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-//         imgSrc: ["'self'", 'data:'],
-//         connectSrc: ["'self'", 'http://127.0.0.1:3000', 'ws://localhost:*'], // Allow API requests
-//         frameSrc: [
-//           "'self'",
-//           'https://js.stripe.com' // Allow Stripe Checkout to load in iframe
-//         ]
-//       }
-//     }
-//   })
-// );
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -85,11 +66,12 @@ app.use(
   })
 );
 
+app.use(compression());
+
 // test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  console.log('hello:', req.cookies);
-  console.log('test middleware');
+
   next();
 });
 

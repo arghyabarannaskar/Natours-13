@@ -45,7 +45,7 @@ exports.signup = catchAsync(async function(req, res, next) {
     passwordConfirm: req.body.passwordConfirm
   });
   const url = `${req.protocol}://${req.get('host')}/me`;
-  console.log(url);
+
   await new Email(newUser, url).sendWelcome();
   createSendToken(newUser, 201, res);
 });
@@ -118,9 +118,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 // Only for rendered pages, no errors
 exports.isLoggedIn = async (req, res, next) => {
-  console.log('Cookies:', req.cookies);
-  console.log('isLoggedIn middleware triggered');
-
   if (req.cookies.jwt) {
     try {
       // 2) Verification of token
@@ -138,7 +135,6 @@ exports.isLoggedIn = async (req, res, next) => {
         return next();
       }
 
-      console.log(currentUser);
       // There is a logged in user
       res.locals.user = currentUser;
       return next();
@@ -162,9 +158,8 @@ exports.restrictTo = (...roles) => {
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on POSTed email
-  console.log(req.body.email);
   const user = await userModel.findOne({ email: req.body.email });
-  console.log(user);
+
   if (!user) {
     return next(new AppError('No user found with that email', 404));
   }

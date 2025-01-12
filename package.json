@@ -7,10 +7,6 @@
     "start": "npx nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",
-    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
-    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
-    "latestbuild:js": "parcel build ./public/js/index.js --dist-dir ./public/js --no-scope-hoist",
-    "new-watch:js": "parcel watch ./public/js/index.js --dist-dir ./public/js",
     "watch": "parcel watch ./public/js/index.js --dist-dir ./public/dist --target app",
     "build": "parcel build ./public/js/index.js --dist-dir ./public/dist --target app"
   },
@@ -32,6 +28,7 @@
     "@babel/polyfill": "^7.12.1",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
+    "compression": "^1.7.5",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",

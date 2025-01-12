@@ -72,8 +72,6 @@ reviewSchema.statics.calcAverageRating = async function(tourId) {
     }
   ]);
 
-  console.log(stats);
-
   await tourModel.findByIdAndUpdate(tourId, {
     ratingsQuantity: stats[0].nReviews || 0,
     ratingsAverage: stats[0].avgRating || 0
@@ -89,7 +87,7 @@ reviewSchema.post('save', function() {
 
 reviewSchema.pre(/^findOneAnd/, async function(next) {
   this.r = await this.findOne();
-  console.log(this.r);
+
   next();
 });
 reviewSchema.post(/^findOneAnd/, async function(next) {
